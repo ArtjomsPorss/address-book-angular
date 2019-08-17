@@ -1,0 +1,9 @@
+<!-- <app-entry-detail [entry]="selectedEntry"></app-entry-detail> -->
+
+<ul class="entries">
+  <li *ngFor="let entry of entries">
+    <a routerLink="/details/{{entry.id}}">
+      <span class="badge">{{entry.id}}</span> {{entry.name}}
+    </a>
+  </li>
+</ul>
