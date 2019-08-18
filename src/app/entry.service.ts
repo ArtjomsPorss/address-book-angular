@@ -4,12 +4,26 @@ import { ENTRIES} from './mock-entries'
 import { Observable, of } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+    // ,
+    // 'Authorization': 'my-auth-token'
+  })
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class EntryService {
 
+
+  updateEntry(entry: Entry) : Observable<Entry> {
+    return this.http.post<Entry>(this.updateEntryUrl, entry);
+  }
+
   
+  private updateEntryUrl = 'server/update';
   private getAllEntriesUrl = 'server/all';
   private getEntryById = 'server/detail/';
   

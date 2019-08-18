@@ -9,6 +9,8 @@ import { AddressBookEntriesComponent } from './address-book-entries/address-book
 import { EntryDetailComponent } from './entry-detail/entry-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { ReactiveFormsModule } from "@angular/forms";
+
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

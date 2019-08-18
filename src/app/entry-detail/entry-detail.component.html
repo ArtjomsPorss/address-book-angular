@@ -1,9 +1,17 @@
-<div *ngIf="entry">
-  <h2>{{entry.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{entry.id}}</div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="entry.name" placeholder="name" />
-    </label>
-  </div>
+<div *ngIf="entryForm.value">
+  <h2>{{entryForm.value.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{entryForm.value.id}}</div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="entryForm">
+    <div>
+      <label>name:
+        <input placeholder="name" formControlName="name" value="{{entryForm.value.name}}"/>
+      </label>
+    </div>
+    <div>
+      <label>surname:
+        <input placeholder="surname" formControlName="surname" value="{{entryForm.value.surname}}"/>
+      </label>
+    </div>
+    <button type="submit">Submit2</button>
+  </form>
 </div>

@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Entry } from '../entry';
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
-import { EntryService } from "../entry.service";
+import { EntryService } from "../entry.service"
+import { FormGroup, FormControl } from "@angular/forms";
 
 @Component({
   selector: 'app-entry-detail',
@@ -11,7 +12,11 @@ import { EntryService } from "../entry.service";
 })
 export class EntryDetailComponent implements OnInit {
 
-  @Input() entry : Entry;
+  entryForm = new FormGroup({
+    id: new FormControl(''),
+    name: new FormControl(''),
+    surname: new FormControl('')
+  });
 
   constructor(
     private route: ActivatedRoute,
@@ -25,8 +30,19 @@ export class EntryDetailComponent implements OnInit {
 
   getEntry() {
     const id = +this.route.snapshot.paramMap.get('id');
+    this.entryService.getEntry(id).subscribe(entry => this.setupEntry(entry));
+  }
+  
+  setupEntry(entry: Entry){
+    this.entryForm.get('id').setValue(entry.id);
+    this.entryForm.get('name').setValue(entry.name);
+    this.entryForm.get('surname').setValue(entry.surname);
+  }
 
-    this.entryService.getEntry(id).subscribe(entry => this.entry = entry)
+  onSubmit() {
+    console.log(this.entryForm.value);
+
+    this.entryService.updateEntry(this.entryForm.value).subscribe(entry => this.setupEntry(entry));
   }
 
 }
